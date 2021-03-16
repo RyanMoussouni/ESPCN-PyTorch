@@ -83,9 +83,6 @@ scale_factor = args.scale_factor
 for filename in os.listdir(dataroot):
     # Open image
     image = Image.open(f"{dataroot}/{filename}").convert("YCbCr")
-    image_width = int(image.size[0] * scale_factor)
-    image_height = int(image.size[1] * scale_factor)
-    image = image.resize((image_width, image_height), Image.BICUBIC)
     y, cb, cr = image.split()
 
     preprocess = transforms.ToTensor()
@@ -113,19 +110,7 @@ for filename in os.listdir(dataroot):
     total_mse_value += mse(src_img, dst_img)
     total_rmse_value += rmse(src_img, dst_img)
     total_psnr_value += psnr(src_img, dst_img)
-    total_ssim_value += ssim(src_img, dst_img)
-    total_ms_ssim_value += msssim(src_img, dst_img)
-    total_niqe_value += cal_niqe(f"result/{filename}")
-    total_sam_value += sam(src_img, dst_img)
-    total_vif_value += vifp(src_img, dst_img)
 
     total_file += 1
 
-print(f"Avg MSE: {total_mse_value / total_file:.2f}\n"
-      f"Avg RMSE: {total_rmse_value / total_file:.2f}\n"
-      f"Avg PSNR: {total_psnr_value / total_file:.2f}\n"
-      f"Avg SSIM: {total_ssim_value / total_file:.4f}\n"
-      f"Avg MS-SSIM: {total_ms_ssim_value / total_file:.4f}\n"
-      f"Avg NIQE: {total_niqe_value / total_file:.2f}\n"
-      f"Avg SAM: {total_sam_value / total_file:.4f}\n"
-      f"Avg VIF: {total_vif_value / total_file:.4f}")
+print(f"Avg PSNR: {total_psnr_value / total_file:.2f}\n")
