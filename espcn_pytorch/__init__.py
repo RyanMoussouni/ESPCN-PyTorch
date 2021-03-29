@@ -11,14 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
-from .calculate_niqe import cal_niqe
-from .datasets import DatasetFromFolder
-from .datasets import check_image_file
 from .model import ESPCN
 
 __all__ = [
-    "cal_niqe",
-    "DatasetFromFolder",
-    "check_image_file",
     "ESPCN"
 ]
